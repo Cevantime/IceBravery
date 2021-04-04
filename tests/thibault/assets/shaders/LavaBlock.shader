@@ -91,7 +91,7 @@ float fbm(vec2 coord){
 void fragment()
 {
 	vec2 uv = ((world_pos + camera_offset) / resolution_factor) * 0.015;
-	// vec2 size = vec2(float(textureSize(TEXTURE, 0).x), float(textureSize(TEXTURE, 0).y)); 
+	
 	vec2 size = vec2(48.0, 48.0);
 	vec2 noise_uv = round(uv * size) / size;
 	

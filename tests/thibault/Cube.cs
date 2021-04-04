@@ -12,6 +12,7 @@ public class Cube : RigidBody2D
 
     public override void _Ready()
     {
+        GD.Randomize();
         float screenWidth = (int)ProjectSettings.GetSetting("display/window/size/width");
         float screenHeight = (int)ProjectSettings.GetSetting("display/window/size/height");
 

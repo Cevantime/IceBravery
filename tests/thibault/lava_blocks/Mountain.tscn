@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
+shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
+shader_param/colors = 8
+shader_param/scale_factor = 4.0
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/screen_ratio = null
+shader_param/camera_offset = Vector2( 0, 0 )
+
+[node name="Mountain" instance=ExtResource( 2 )]
+material = SubResource( 1 )
+polygon = PoolVector2Array( 0, 0, 65.4016, 43.6001, 147.296, 65.6487, 238.011, 59.9791, 322.425, 41.7102, 370.302, 13.362, 410.62, 4.54255, 454.087, 22.1814, 522.123, 76.988, 566.85, 148.804, 648, 223, 729, 279, 843.553, 321.237, 940, 300, 940, 1150, 0, 1150 )
+nexts = [ "StartSlope" ]
+
+[node name="EndPosition" parent="." index="0"]
+position = Vector2( 1054.65, 296.22 )
+
+[node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+polygon = PoolVector2Array( 0, 0, 65.4016, 43.6001, 147.296, 65.6487, 238.011, 59.9791, 322.425, 41.7102, 370.302, 13.362, 410.62, 4.54255, 454.087, 22.1814, 522.123, 76.988, 566.85, 148.804, 648, 223, 729, 279, 843.553, 321.237, 940, 300, 940, 1150, 0, 1150 )
+
+[node name="LavaSurface" parent="." index="2" instance=ExtResource( 3 )]
+points = PoolVector2Array( -0.949738, -0.949738, 64.1041, 44.3051, 146.128, 63.397, 240.174, 59.8615, 321.491, 41.4767, 366.746, 13.8995, 412.708, 4.70712, 452.68, 22.601, 520.145, 74.9853, 569.247, 152.725, 646.644, 221.628, 725.93, 276.373, 842.97, 319.791, 936.414, 302.801, 941.239, 395.905, 939.118, 487.122, 940.532, 535.913, 936.922, 606.817 )
