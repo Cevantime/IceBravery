@@ -17,7 +17,7 @@ shader_param/camera_offset = Vector2( 0, 0 )
 [node name="SimpleSlope" instance=ExtResource( 2 )]
 material = SubResource( 1 )
 polygon = PoolVector2Array( -0.23056, 0.404772, 39.7719, 18.6736, 75.0561, 40.8494, 110.957, 65.2907, 153.48, 94.2689, 210, 120, 210, 700, 0, 700 )
-nexts = [ "OtherSlope" ]
+nexts = [ "OtherSlope", "JumpingPeek", "RavinSlope" ]
 
 [node name="EndPosition" parent="." index="0"]
 position = Vector2( 210, 120 )
