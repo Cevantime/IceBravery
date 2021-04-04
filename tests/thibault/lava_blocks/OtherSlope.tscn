@@ -17,13 +17,13 @@ shader_param/camera_offset = Vector2( 0, 0 )
 [node name="OtherSlope" instance=ExtResource( 3 )]
 material = SubResource( 1 )
 polygon = PoolVector2Array( 0, 0, 41, 37, 69.5, 106.5, 84, 163, 106.946, 206.865, 168.737, 234.089, 226.72, 257.423, 280, 280, 280, 810, 0, 810 )
-nexts = [ "StartSlope" ]
+nexts = [ "StartSlope", "RavinSlope" ]
 
 [node name="EndPosition" parent="." index="0"]
 position = Vector2( 280, 280 )
 
 [node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
-polygon = PoolVector2Array( 0, 0, 41, 37, 69.5, 106.5, 84, 163, 106.946, 206.865, 168.737, 234.089, 226.72, 257.423, 280, 265, 280, 810, 0, 810 )
+polygon = PoolVector2Array( 0, 0, 41, 37, 69.5, 106.5, 84, 163, 106.946, 206.865, 168.737, 234.089, 226.72, 257.423, 280, 280, 280, 810, 0, 810 )
 
 [node name="LavaSurface" parent="." index="2" instance=ExtResource( 1 )]
 points = PoolVector2Array( 0.571289, -0.412136, 40.707, 37.0479, 69.6288, 107.575, 83.5622, 163.71, 106.978, 206.638, 226.801, 257.429, 280.987, 280.366 )

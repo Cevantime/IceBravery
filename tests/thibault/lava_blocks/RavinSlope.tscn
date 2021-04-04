@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
+shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
+shader_param/colors = 8
+shader_param/scale_factor = 4.0
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/screen_ratio = null
+shader_param/camera_offset = Vector2( 0, 0 )
+
+[node name="RavinSlope" instance=ExtResource( 2 )]
+material = SubResource( 1 )
+position = Vector2( 2.12128, 1.4142 )
+polygon = PoolVector2Array( 0, 0, 90.4854, 23.3441, 120.184, 62.235, 164.025, 106.783, 185.238, 108.904, 190.895, 116.682, 183.116, 147.795, 217.057, 209.313, 260.191, 230.526, 330.902, 233.355, 404.441, 267.296, 320.295, 409.424, 321.913, 444.006, 344.566, 468.546, 566.546, 582.92, 596.782, 585.822, 880, 613, 878.028, 1847.09, 5.03058, 1838.61 )
+nexts = [ "SimpleSlope", "OtherSlope" ]
+
+[node name="EndPosition" parent="." index="0"]
+position = Vector2( 880, 613 )
+
+[node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+polygon = PoolVector2Array( 0, 0, 90.4854, 23.3441, 120.184, 62.235, 164.025, 106.783, 185.238, 108.904, 190.895, 116.682, 183.116, 147.795, 217.057, 209.313, 260.191, 230.526, 330.902, 233.355, 404.441, 267.296, 320.295, 409.424, 321.913, 444.006, 344.566, 468.546, 566.546, 582.92, 596.782, 585.822, 880, 613, 878.028, 1847.09, 5.03058, 1838.61 )
+
+[node name="LavaSurface" parent="." index="2" instance=ExtResource( 1 )]
+points = PoolVector2Array( 2.03326, -2.99306, 89.5285, 25.4903, 163.028, 107.23, 184.409, 110.126, 189.532, 117.698, 181.682, 147.725, 215.356, 209.461, 258.01, 232.471, 330.408, 236.961, 400.562, 268.39, 318.728, 407.452 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LavaSurface2" parent="." index="3" instance=ExtResource( 1 )]
+points = PoolVector2Array( 441.253, 517.815, 563.466, 582.701, 876.492, 614.107 )
+begin_cap_mode = 2
+end_cap_mode = 2
