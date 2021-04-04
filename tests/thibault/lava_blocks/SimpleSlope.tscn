@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
+shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
+shader_param/colors = 8
+shader_param/scale_factor = 4.0
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/screen_ratio = null
+shader_param/camera_offset = Vector2( 0, 0 )
+
+[node name="LavaBlock" instance=ExtResource( 2 )]
+material = SubResource( 1 )
+polygon = PoolVector2Array( 0, 0, 79.1917, 67.1041, 169.701, 120.137, 290.914, 162.464, 450, 240, 450, 700, 0, 700 )
+
+[node name="EndPosition" parent="." index="0"]
+position = Vector2( 450, 240 )
+
+[node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+polygon = PoolVector2Array( -1.06496, -0.778172, 79.1917, 67.1041, 169.701, 120.137, 290.914, 162.464, 432.173, 238.815, 432.173, 346.538, 0.0199585, 337.719 )
+
+[node name="LavaSurface" parent="." index="2" instance=ExtResource( 1 )]
+points = PoolVector2Array( -1.03909, -0.00497437, 76.0356, 63.9882, 170.434, 120.91, 290.996, 162.63, 449.388, 240.765 )

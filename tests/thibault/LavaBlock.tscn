@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=2]
+[ext_resource path="res://tests/thibault/LavaBlock.cs" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 2 )
+shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
+shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
+shader_param/colors = 8
+shader_param/scale_factor = 4.0
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/screen_ratio = null
+shader_param/camera_offset = Vector2( 0, 0 )
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.0
+
+[node name="LavaBlock" type="Polygon2D"]
+material = SubResource( 3 )
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( 0, 0, 256, 0, 256, 256, 0, 256 )
+script = ExtResource( 3 )
+cameraPath = NodePath("")
+
+[node name="EndPosition" type="Position2D" parent="."]
+position = Vector2( 256, 0 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+polygon = PoolVector2Array( 0, 0, 256, 0, 256, 256, 0, 256 )
