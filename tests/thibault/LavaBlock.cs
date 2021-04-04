@@ -6,12 +6,18 @@ public class LavaBlock : Polygon2D
 {
     [Export]
     public NodePath cameraPath;
+
+    [Export]
+    public Godot.Collections.Array<string> nexts;
     private Vector2 screenSize;
     private float screenRatio;
     Vector2 resolutionFactor;
 
     private ShaderMaterial innerMaterial;
-    private Camera2D camera;
+    public Camera2D camera;
+
+    public bool loadedNext = false;
+
 
     public override void _Ready()
     {
@@ -20,7 +26,10 @@ public class LavaBlock : Polygon2D
 
     public override void _EnterTree()
     {
-        _Prepare();
+        if (Engine.EditorHint)
+        {
+            _Prepare();
+        }
     }
 
     public void _Prepare()
@@ -35,7 +44,7 @@ public class LavaBlock : Polygon2D
         innerMaterial = (ShaderMaterial)Material;
         resolutionFactor = OS.WindowSize / screenSize;
         innerMaterial.SetShaderParam("resolution_factor", resolutionFactor);
-        if (cameraPath != null)
+        if (cameraPath != "")
         {
             camera = GetNode<Camera2D>(cameraPath);
         }

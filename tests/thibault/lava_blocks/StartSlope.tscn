@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=2]
 [ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=3]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
 shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
@@ -14,21 +14,16 @@ shader_param/resolution_factor = Vector2( 6, 5.63889 )
 shader_param/screen_ratio = null
 shader_param/camera_offset = Vector2( 0, 0 )
 
-[sub_resource type="StreamTexture" id=2]
-flags = 6
-load_path = "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
-
 [node name="StartSlope" instance=ExtResource( 1 )]
-material = SubResource( 3 )
-texture = SubResource( 2 )
-polygon = PoolVector2Array( 0, 0, 75.1729, 40.6192, 118.827, 86.0552, 146.89, 147.527, 176.29, 194.745, 221.726, 241.963, 286.285, 281.52, 347.312, 295.329, 416.802, 296.665, 483.619, 274.392, 548.655, 241.429, 613.69, 224.057, 614.901, 759.495, 0, 760.493 )
+material = SubResource( 1 )
+polygon = PoolVector2Array( 0, 0, 55.6971, 27.7833, 77.416, 41.5563, 105.492, 74.3996, 130.919, 127.903, 146.281, 157.038, 163.233, 178.757, 186.541, 196.238, 212.498, 205.773, 243.752, 213.719, 292.487, 217.427, 330, 230, 330, 650, 0, 650 )
+nexts = [ "SimpleSlope" ]
 
 [node name="EndPosition" parent="." index="0"]
-position = Vector2( 540, 250 )
-
-[node name="LavaSurface" parent="." index="1" instance=ExtResource( 3 )]
-position = Vector2( 0, 1 )
-points = PoolVector2Array( -2.17322, -0.0814514, 71.449, 39.5612, 116.755, 85.8111, 140.352, 135.836, 172.444, 189.637, 221.525, 241.55, 286.409, 283.428, 349.48, 296.109, 416.889, 297.11, 484.632, 273.751, 530.017, 249.723, 554.378, 239.045, 613.111, 222.359 )
+position = Vector2( 330, 230 )
 
 [node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
-polygon = PoolVector2Array( 0, 0, 75.1729, 40.6192, 118.827, 86.0552, 146.89, 147.527, 176.29, 194.745, 221.726, 241.963, 286.316, 286.062, 344.67, 300.762, 421.733, 302.989, 481.423, 281.608, 540, 250, 540, 750, 0, 760.493 )
+polygon = PoolVector2Array( 0, 0, 55.6971, 27.7833, 77.416, 41.5563, 105.492, 74.3996, 130.919, 127.903, 146.281, 157.038, 163.233, 178.757, 186.541, 196.238, 212.498, 205.773, 243.752, 213.719, 292.487, 217.427, 330, 230, 330, 650, 0, 650 )
+
+[node name="LavaSurface" parent="." index="2" instance=ExtResource( 3 )]
+points = PoolVector2Array( 0.542068, -0.00419235, 55.9786, 28.344, 77.0823, 41.8882, 105.431, 74.9611, 125.78, 119.402, 145.803, 157.111, 164.157, 180.471, 186.849, 196.489, 215.548, 206.5, 243.914, 214.509, 292.302, 216.845, 330.011, 230.194 )

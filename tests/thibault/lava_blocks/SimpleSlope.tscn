@@ -14,15 +14,16 @@ shader_param/resolution_factor = Vector2( 6, 5.63889 )
 shader_param/screen_ratio = null
 shader_param/camera_offset = Vector2( 0, 0 )
 
-[node name="LavaBlock" instance=ExtResource( 2 )]
+[node name="SimpleSlope" instance=ExtResource( 2 )]
 material = SubResource( 1 )
-polygon = PoolVector2Array( 0, 0, 79.1917, 67.1041, 169.701, 120.137, 290.914, 162.464, 450, 240, 450, 700, 0, 700 )
+polygon = PoolVector2Array( -0.23056, 0.404772, 39.7719, 18.6736, 75.0561, 40.8494, 110.957, 65.2907, 153.48, 94.2689, 210, 120, 210, 700, 0, 700 )
+nexts = [ "OtherSlope" ]
 
 [node name="EndPosition" parent="." index="0"]
-position = Vector2( 450, 240 )
+position = Vector2( 210, 120 )
 
 [node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
-polygon = PoolVector2Array( -1.06496, -0.778172, 79.1917, 67.1041, 169.701, 120.137, 290.914, 162.464, 432.173, 238.815, 432.173, 346.538, 0.0199585, 337.719 )
+polygon = PoolVector2Array( -0.23056, 0.404772, 39.7719, 18.6736, 75.0561, 40.8494, 110.957, 65.2907, 153.48, 94.2689, 210, 120, 210, 700, 0, 700 )
 
 [node name="LavaSurface" parent="." index="2" instance=ExtResource( 1 )]
-points = PoolVector2Array( -1.03909, -0.00497437, 76.0356, 63.9882, 170.434, 120.91, 290.996, 162.63, 449.388, 240.765 )
+points = PoolVector2Array( -0.386826, -0.0237274, 38.3235, 18.3303, 76.3665, 41.69, 122.085, 72.725, 147.447, 90.7454, 164.132, 99.0881, 209.85, 120.446 )

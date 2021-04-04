@@ -23,8 +23,11 @@ texture = ExtResource( 1 )
 polygon = PoolVector2Array( 0, 0, 256, 0, 256, 256, 0, 256 )
 script = ExtResource( 3 )
 cameraPath = NodePath("")
+nexts = [  ]
 
-[node name="EndPosition" type="Position2D" parent="."]
+[node name="EndPosition" type="Position2D" parent="." groups=[
+"EndPositions",
+]]
 position = Vector2( 256, 0 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
