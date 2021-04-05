@@ -2,7 +2,7 @@
 
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=2]
-[ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/thibault/LavaSurfaceBurn.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -25,5 +25,7 @@ position = Vector2( 330, 230 )
 [node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
 polygon = PoolVector2Array( 0, 0, 55.6971, 27.7833, 77.416, 41.5563, 105.492, 74.3996, 130.919, 127.903, 146.281, 157.038, 163.233, 178.757, 186.541, 196.238, 212.498, 205.773, 243.752, 213.719, 292.487, 217.427, 330, 230, 330, 650, 0, 650 )
 
-[node name="LavaSurface" parent="." index="2" instance=ExtResource( 3 )]
-points = PoolVector2Array( 0.542068, -0.00419235, 55.9786, 28.344, 77.0823, 41.8882, 105.431, 74.9611, 125.78, 119.402, 145.803, 157.111, 164.157, 180.471, 186.849, 196.489, 215.548, 206.5, 243.914, 214.509, 292.302, 216.845, 330.011, 230.194 )
+[node name="LavaSurfaceBurn" parent="." index="2" instance=ExtResource( 3 )]
+points = PoolVector2Array( -0.657242, -0.687756, 54.4049, 27.3439, 76.4297, 41.026, 105.796, 74.0633, 145.508, 157.157, 162.193, 177.513, 186.554, 197.202, 243.285, 213.888, 293.341, 217.225, 329.716, 230.24 )
+begin_cap_mode = 0
+end_cap_mode = 1

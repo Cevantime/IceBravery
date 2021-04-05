@@ -4,7 +4,7 @@
 [ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=2]
 [ext_resource path="res://tests/thibault/LavaBlock.cs" type="Script" id=3]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
 shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
@@ -18,12 +18,12 @@ shader_param/camera_offset = Vector2( 0, 0 )
 friction = 0.0
 
 [node name="LavaBlock" type="Polygon2D"]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 polygon = PoolVector2Array( 0, 0, 256, 0, 256, 256, 0, 256 )
 script = ExtResource( 3 )
-cameraPath = NodePath("")
 nexts = [  ]
+cameraPath = NodePath("")
 
 [node name="EndPosition" type="Position2D" parent="." groups=[
 "EndPositions",
