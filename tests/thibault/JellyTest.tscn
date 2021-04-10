@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=1]
+[ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/thibault/jelly/Jelly.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
+shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
+shader_param/colors = 8
+shader_param/scale_factor = 4.0
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/screen_ratio = null
+shader_param/camera_offset = Vector2( 0, 0 )
+
+[node name="JellyTest" type="Node2D"]
+
+[node name="LavaBlock" parent="." instance=ExtResource( 2 )]
+material = SubResource( 1 )
+position = Vector2( 6.172, 22.8241 )
+polygon = PoolVector2Array( 2.12991, -7.2248, 31.1627, -12.5642, 43.5099, -12.8979, 49.183, -7.2248, 72.8764, 3.78764, 111.92, 42.8317, 137.282, 84.5454, 148.331, 93.1184, 157.459, 86.372, 168.174, 72.8791, 182.063, 50.6555, 197.54, 43.909, 204.287, 50.2586, 238.019, 56.2114, 252.703, 47.0838, 274.926, 24.0665, 276.786, 162.455, 0.361572, 160.534 )
+
+[node name="Jelly" parent="." instance=ExtResource( 3 )]
+position = Vector2( 231.377, 40.9664 )

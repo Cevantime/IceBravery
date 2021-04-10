@@ -28,4 +28,4 @@ polygon = PoolVector2Array( 0, 0, 55.6971, 27.7833, 77.416, 41.5563, 105.492, 74
 [node name="LavaSurfaceBurn" parent="." index="2" instance=ExtResource( 3 )]
 points = PoolVector2Array( -0.657242, -0.687756, 54.4049, 27.3439, 76.4297, 41.026, 105.796, 74.0633, 145.508, 157.157, 162.193, 177.513, 186.554, 197.202, 243.285, 213.888, 293.341, 217.225, 329.716, 230.24 )
 begin_cap_mode = 0
-end_cap_mode = 1
+end_cap_mode = 0
