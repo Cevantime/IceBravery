@@ -40,14 +40,14 @@ public class LavaBlock : Polygon2D
         screenSize = new Vector2(screenWidth, screenHeight);
 
         screenRatio = screenSize.x / screenSize.y;
-        Material = (Material)Material.Duplicate();
-        innerMaterial = (ShaderMaterial)Material;
-        resolutionFactor = OS.WindowSize / screenSize;
-        innerMaterial.SetShaderParam("resolution_factor", resolutionFactor);
-        if (cameraPath != "")
-        {
-            camera = GetNode<Camera2D>(cameraPath);
-        }
+        // Material = (Material)Material.Duplicate();
+        // innerMaterial = (ShaderMaterial)Material;
+        // resolutionFactor = OS.WindowSize / screenSize;
+        // innerMaterial.SetShaderParam("resolution_factor", resolutionFactor);
+        // if (cameraPath != "")
+        // {
+        //     camera = GetNode<Camera2D>(cameraPath);
+        // }
         CollisionPolygon2D collisionPolygon2D = GetNode<CollisionPolygon2D>("StaticBody2D/CollisionPolygon2D");
         collisionPolygon2D.Polygon = Polygon;
     }

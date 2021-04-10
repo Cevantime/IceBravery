@@ -2,8 +2,8 @@
 
 [ext_resource path="res://tests/thibault/jelly/Jelly.cs" type="Script" id=1]
 
-[node name="Jelly" type="Polygon2D"]
+[node name="JellyJoints" type="Polygon2D"]
 polygon = PoolVector2Array( -10, -10, -5, -10, 0, -10, 5, -10, 10, -10, 10, -5, 10, 0, 10, 5, 10, 10, 5, 10, 0, 10, -5, 10, -10, 10, -10, 5, -10, 0, -10, -5 )
 script = ExtResource( 1 )
-AtomW = 5
 AtomH = 5
+AtomW = 5

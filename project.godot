@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="IceBravery"
-run/main_scene="res://tests/thibault/JellyTest.tscn"
+run/main_scene="res://tests/thibault/SlideTest.tscn"
 config/icon="res://icon.png"
 
 [display]

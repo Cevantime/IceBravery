@@ -1,42 +1,29 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tests/thibault/lava_blocks/StartSlope.tscn" type="PackedScene" id=1]
-[ext_resource path="res://tests/thibault/Cube.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=3]
-
-[sub_resource type="PhysicsMaterial" id=1]
-friction = 0.0
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
-shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
-shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
-shader_param/colors = 8
-shader_param/scale_factor = 4.0
-shader_param/resolution_factor = Vector2( 6, 5.63889 )
-shader_param/screen_ratio = null
-shader_param/camera_offset = Vector2( 874.33, -167.19 )
+[ext_resource path="res://tests/thibault/jelly/Jelly.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tests/thibault/CameraOffset.cs" type="Script" id=4]
 
 [node name="SlideTest" type="Node2D"]
 
-[node name="CameraOffset" type="Node2D" parent="."]
-position = Vector2( 38.4037, -73.7174 )
+[node name="CameraOffset" type="Node2D" parent="." groups=[
+"CameraOffset",
+]]
+position = Vector2( 49.1854, -64.9131 )
+script = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="CameraOffset"]
 position = Vector2( 107.318, 44.068 )
 current = true
 
-[node name="Cube" parent="." instance=ExtResource( 2 )]
-position = Vector2( 38.4037, -73.7174 )
-z_index = 1
-physics_material_override = SubResource( 1 )
-cameraPath = NodePath("../CameraOffset/Camera2D")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Cube"]
-remote_path = NodePath("../../CameraOffset")
-update_rotation = false
-update_scale = false
-
 [node name="StartSlope" parent="." instance=ExtResource( 1 )]
-material = SubResource( 2 )
 cameraPath = NodePath("../CameraOffset/Camera2D")
+
+[node name="Jelly" parent="." instance=ExtResource( 2 )]
+position = Vector2( 39.1854, -74.9131 )
+z_index = 1
+polygon = PoolVector2Array( -10, -10, -3.33333, -10, 3.33333, -10, 10, -10, 10, -3.33333, 10, 3.33333, 10, 10, 3.33333, 10, -3.33333, 10, -10, 10, -10, 3.33333, -10, -3.33333 )
+AtomH = 4
+AtomW = 4
+
+[editable path="Jelly"]

@@ -4,20 +4,21 @@
 [ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=2]
 [ext_resource path="res://tests/thibault/LavaBlock.cs" type="Script" id=3]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
 shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
 shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
 shader_param/colors = 8
 shader_param/scale_factor = 4.0
-shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/resolution_factor = Vector2( 4.26875, 4.12778 )
 shader_param/screen_ratio = null
 shader_param/camera_offset = Vector2( 0, 0 )
 
 [sub_resource type="PhysicsMaterial" id=2]
+friction = 0.0
 
 [node name="LavaBlock" type="Polygon2D"]
-material = SubResource( 1 )
+material = SubResource( 3 )
 texture = ExtResource( 1 )
 polygon = PoolVector2Array( 0, 0, 256, 0, 256, 256, 0, 256 )
 script = ExtResource( 3 )

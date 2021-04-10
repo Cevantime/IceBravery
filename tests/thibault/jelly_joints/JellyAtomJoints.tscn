@@ -5,7 +5,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 1.5
 
-[node name="JellyAtom" type="RigidBody2D"]
+[node name="JellyAtomJoints" type="RigidBody2D"]
 mass = 0.102041
 script = ExtResource( 1 )
 

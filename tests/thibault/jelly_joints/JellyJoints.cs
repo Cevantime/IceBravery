@@ -3,7 +3,7 @@ using System;
 using Godot.Collections;
 
 [Tool]
-public class Jelly : Polygon2D
+public class JellyJoints : Polygon2D
 {
     private Rect2 rect = new Rect2(-10, -10, 20, 20);
     private int atomW = 7;
