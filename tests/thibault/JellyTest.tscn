@@ -10,7 +10,7 @@ shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
 shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
 shader_param/colors = 8
 shader_param/scale_factor = 4.0
-shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/resolution_factor = Vector2( 4.26875, 4.12778 )
 shader_param/screen_ratio = null
 shader_param/camera_offset = Vector2( 0, 0 )
 
@@ -23,3 +23,5 @@ polygon = PoolVector2Array( 2.12991, -7.2248, 31.1627, -12.5642, 43.5099, -12.89
 
 [node name="Jelly" parent="." instance=ExtResource( 3 )]
 position = Vector2( 231.377, 40.9664 )
+damping = 3.0
+stiffness = 40.0

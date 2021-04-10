@@ -10,6 +10,12 @@ public class Jelly : Polygon2D
     private int atomH = 7;
 
     [Export]
+    public float stiffness = 100.0f;
+
+    [Export]
+    public float damping = 10.0f;
+
+    [Export]
     public Rect2 Rect
     {
         get
@@ -51,9 +57,9 @@ public class Jelly : Polygon2D
         }
     }
 
-    private Array<RigidBody2D> edgeBodies = new Array<RigidBody2D>();
+    private Array<JellyAtom> edgeBodies = new Array<JellyAtom>();
 
-    private Dictionary<Vector2, RigidBody2D> mapAtoms = new Dictionary<Vector2, RigidBody2D>();
+    private Dictionary<Vector2, JellyAtom> mapAtoms = new Dictionary<Vector2, JellyAtom>();
 
     private PackedScene jellyAtomPacked;
     public override void _Ready()
@@ -76,7 +82,7 @@ public class Jelly : Polygon2D
 
     private void UpdateRect()
     {
-        edgeBodies = new Array<RigidBody2D>();
+        edgeBodies = new Array<JellyAtom>();
         if (jellyAtomPacked == null)
         {
             return;
@@ -87,14 +93,15 @@ public class Jelly : Polygon2D
         {
             n.QueueFree();
         }
-        mapAtoms = new Dictionary<Vector2, RigidBody2D>();
+        mapAtoms = new Dictionary<Vector2, JellyAtom>();
         for (int j = atomH - 1; j >= 0; j--)
         {
             for (int i = atomW - 1; i >= 0; i--)
             {
-                RigidBody2D jellyAtom = (RigidBody2D)jellyAtomPacked.Instance();
+                JellyAtom jellyAtom = (JellyAtom)jellyAtomPacked.Instance();
                 Vector2 gridPos = new Vector2(i, j);
                 jellyAtom.Position = origin + atomSeparation * gridPos;
+                jellyAtom.jelly = this;
                 AddChild(jellyAtom);
                 mapAtoms.Add(gridPos, jellyAtom);
                 Vector2[] neighbours = new Vector2[] {
@@ -105,52 +112,38 @@ public class Jelly : Polygon2D
                 };
                 foreach (Vector2 neighbour in neighbours)
                 {
-                    RigidBody2D neighbourBody;
+                    JellyAtom neighbourBody;
 
                     if (!mapAtoms.TryGetValue(neighbour, out neighbourBody))
                     {
                         continue;
                     }
 
-                    DampedSpringJoint2D joint = new DampedSpringJoint2D();
-                    Vector2 separation = new Vector2(neighbourBody.Position - jellyAtom.Position);
-                    joint.Position = jellyAtom.Position;
-                    joint.RestLength = separation.Length();
-                    joint.Rotation = separation.Angle() - Mathf.Pi / 2;
-                    joint.Length = separation.Length();
-                    joint.NodeA = jellyAtom.GetPath();
-                    joint.NodeB = neighbourBody.GetPath();
-                    joint.DisableCollision = false;
-                    joint.Stiffness = 100;
-                    RemoteTransform2D rt = new RemoteTransform2D();
-                    rt.UpdateRotation = false;
-                    rt.UpdateScale = false;
-                    // joint.Scale = new Vector2(0.1f, 0.1f);
-                    AddChild(joint);
-                    // rt.RemotePath = joint.GetPath();
-                    // jellyAtom.AddChild(rt);
+                    float dist = (neighbourBody.Position - jellyAtom.Position).Length();
+                    neighbourBody.AddNeighbour(new Neighbour(jellyAtom, dist));
+                    jellyAtom.AddNeighbour(new Neighbour(neighbourBody, dist));
                 }
             }
         }
 
-        for (int i = 0; i < atomW; i++)
-        {
-            edgeBodies.Add(mapAtoms[new Vector2(i, 0)]);
-        }
+        // for (int i = 0; i < atomW; i++)
+        // {
+        //     edgeBodies.Add(mapAtoms[new Vector2(i, 0)]);
+        // }
 
-        for (int j = 1; j < atomH; j++)
-        {
-            edgeBodies.Add(mapAtoms[new Vector2(atomW - 1, j)]);
-        }
+        // for (int j = 1; j < atomH; j++)
+        // {
+        //     edgeBodies.Add(mapAtoms[new Vector2(atomW - 1, j)]);
+        // }
 
-        for (int i = atomW - 2; i >= 0; i--)
-        {
-            edgeBodies.Add(mapAtoms[new Vector2(i, atomH - 1)]);
-        }
+        // for (int i = atomW - 2; i >= 0; i--)
+        // {
+        //     edgeBodies.Add(mapAtoms[new Vector2(i, atomH - 1)]);
+        // }
 
-        for (int j = atomH - 2; j >= 1; j--)
-        {
-            edgeBodies.Add(mapAtoms[new Vector2(0, j)]);
-        }
+        // for (int j = atomH - 2; j >= 1; j--)
+        // {
+        //     edgeBodies.Add(mapAtoms[new Vector2(0, j)]);
+        // }
     }
 }
