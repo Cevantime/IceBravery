@@ -3,7 +3,7 @@ using System;
 using Godot.Collections;
 
 [Tool]
-public class Jelly : Polygon2D
+public class JellyJoints : Polygon2D
 {
     private Rect2 rect = new Rect2(-10, -10, 20, 20);
     private int atomW = 7;
@@ -17,6 +17,13 @@ public class Jelly : Polygon2D
 
     [Export]
     public float gravityScale = 1.0f;
+
+    [Export]
+    public bool draggable = false;
+
+    public float atomRadius = 1.5f;
+
+    public JellyAtomJoints center;
 
     [Export]
     public Rect2 Rect
@@ -60,16 +67,30 @@ public class Jelly : Polygon2D
         }
     }
 
-    private Array<JellyAtom> edgeBodies = new Array<JellyAtom>();
+    [Export]
+    public float AtomRadius
+    {
+        get
+        {
+            return atomRadius;
+        }
 
-    private Dictionary<Vector2, JellyAtom> mapAtoms = new Dictionary<Vector2, JellyAtom>();
+        set
+        {
+            atomRadius = value;
+            UpdateRect();
+        }
+    }
+
+    private Array<RigidBody2D> edgeBodies = new Array<RigidBody2D>();
+
+    private Dictionary<Vector2, RigidBody2D> mapAtoms = new Dictionary<Vector2, RigidBody2D>();
 
     private PackedScene jellyAtomPacked;
     public override void _Ready()
     {
-        jellyAtomPacked = GD.Load<PackedScene>("res://tests/thibault/jelly_home_made/JellyAtom.tscn");
+        jellyAtomPacked = GD.Load<PackedScene>("res://tests/thibault/jelly_joints/JellyAtomJoints.tscn");
         UpdateRect();
-        //Engine.TimeScale = 0.5f;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -84,30 +105,30 @@ public class Jelly : Polygon2D
         Polygon = p;
     }
 
-    private async void UpdateRect()
+    private void UpdateRect()
     {
-        edgeBodies = new Array<JellyAtom>();
+        edgeBodies = new Array<RigidBody2D>();
         if (jellyAtomPacked == null)
         {
             return;
         }
         Vector2 atomSeparation = new Vector2(atomW > 1 ? rect.Size.x / (atomW - 1) : 0, atomH > 1 ? rect.Size.y / (atomH - 1) : 0);
         Vector2 origin = rect.Position;
-        foreach (Node n in GetChildren())
+        foreach (Node n in mapAtoms.Values)
         {
             n.QueueFree();
         }
-        mapAtoms = new Dictionary<Vector2, JellyAtom>();
+        mapAtoms = new Dictionary<Vector2, RigidBody2D>();
         for (int j = atomH - 1; j >= 0; j--)
         {
             for (int i = atomW - 1; i >= 0; i--)
             {
-                JellyAtom jellyAtom = (JellyAtom)jellyAtomPacked.Instance();
-
+                JellyAtomJoints jellyAtom = (JellyAtomJoints)jellyAtomPacked.Instance();
                 Vector2 gridPos = new Vector2(i, j);
                 jellyAtom.Position = origin + atomSeparation * gridPos;
-                jellyAtom.jelly = this;
                 jellyAtom.GravityScale = gravityScale;
+                jellyAtom.SetRadius(atomRadius);
+                jellyAtom.SetDraggable(draggable);
                 AddChild(jellyAtom);
                 mapAtoms.Add(gridPos, jellyAtom);
                 Vector2[] neighbours = new Vector2[] {
@@ -116,12 +137,20 @@ public class Jelly : Polygon2D
                     new Vector2(i + 1, j + 1),
                     new Vector2(i - 1, j + 1)
                 };
-                if (i == 3 && j == 3)
+                if (i == 2 && j == 2)
                 {
+                    center = jellyAtom;
+                    Node2D rayCasts = (Node2D)GD.Load<PackedScene>("res://tests/thibault/RayCasts.tscn").Instance();
+                    AddChild(rayCasts);
+                    RemoteTransform2D rt = new RemoteTransform2D();
+                    rt.UpdateRotation = false;
+                    rt.UpdateRotation = false;
+                    rt.RemotePath = rayCasts.GetPath();
+                    jellyAtom.AddChild(rt);
                     foreach (Node n in GetTree().GetNodesInGroup("CameraOffset"))
                     {
                         Node2D cameraOffset = (Node2D)n;
-                        RemoteTransform2D rt = new RemoteTransform2D();
+                        rt = new RemoteTransform2D();
                         rt.UpdateRotation = false;
                         rt.UpdateRotation = false;
                         rt.RemotePath = cameraOffset.GetPath();
@@ -130,18 +159,32 @@ public class Jelly : Polygon2D
                 }
                 foreach (Vector2 neighbour in neighbours)
                 {
-                    JellyAtom neighbourBody;
+                    RigidBody2D neighbourBody;
 
                     if (!mapAtoms.TryGetValue(neighbour, out neighbourBody))
                     {
                         continue;
                     }
 
-                    float dist = (neighbourBody.Position - jellyAtom.Position).Length();
-                    neighbourBody.AddNeighbour(new Neighbour(jellyAtom, dist));
-                    jellyAtom.AddNeighbour(new Neighbour(neighbourBody, dist));
+                    DampedSpringJoint2D joint = new DampedSpringJoint2D();
+                    Vector2 separation = new Vector2(neighbourBody.Position - jellyAtom.Position);
+                    joint.Position = jellyAtom.Position;
+                    joint.RestLength = separation.Length();
+                    joint.Rotation = separation.Angle() - Mathf.Pi / 2;
+                    joint.Length = separation.Length();
+                    joint.NodeA = jellyAtom.GetPath();
+                    joint.NodeB = neighbourBody.GetPath();
+                    joint.DisableCollision = false;
+                    joint.Stiffness = stiffness;
+                    joint.Damping = damping;
+                    RemoteTransform2D rt = new RemoteTransform2D();
+                    rt.UpdateRotation = false;
+                    rt.UpdateScale = false;
+                    // joint.Scale = new Vector2(0.1f, 0.1f);
+                    AddChild(joint);
+                    // rt.RemotePath = joint.GetPath();
+                    // jellyAtom.AddChild(rt);
                 }
-                //await ToSignal(GetTree(), "idle_frame");
             }
         }
 

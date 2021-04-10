@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tests/thibault/jelly_joints/JellyJoints.cs" type="Script" id=1]
+[ext_resource path="res://addons/godot_states/SwitchableStateMachine.cs" type="Script" id=2]
+[ext_resource path="res://tests/thibault/states/CanJump.cs" type="Script" id=3]
+[ext_resource path="res://addons/godot_states/MultipleStateMachine.cs" type="Script" id=4]
+
+[node name="JellyJoints" type="Polygon2D"]
+polygon = PoolVector2Array( -10, -10, -6.66667, -10, -3.33333, -10, 0, -10, 3.33333, -10, 6.66667, -10, 10, -10, 10, -6.66667, 10, -3.33333, 10, 0, 10, 3.33333, 10, 6.66667, 10, 10, 6.66667, 10, 3.33333, 10, 0, 10, -3.33333, 10, -6.66667, 10, -10, 10, -10, 6.66667, -10, 3.33333, -10, 0, -10, -3.33333, -10, -6.66667 )
+script = ExtResource( 1 )
+AtomRadius = 1.2
+
+[node name="States" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="CanJump" type="Node" parent="States/Idle"]
+script = ExtResource( 3 )

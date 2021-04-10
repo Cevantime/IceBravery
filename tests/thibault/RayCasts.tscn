@@ -1,0 +1,59 @@
+[gd_scene format=2]
+
+[node name="RayCasts" type="Node2D"]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 12 )
+
+[node name="RayCast2D7" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 12, 0 )
+
+[node name="RayCast2D8" type="RayCast2D" parent="."]
+position = Vector2( 0, 8 )
+enabled = true
+cast_to = Vector2( 12, 0 )
+
+[node name="RayCast2D9" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 12, 0 )
+
+[node name="RayCast2D10" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( -12, 0 )
+
+[node name="RayCast2D11" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -12, 0 )
+
+[node name="RayCast2D12" type="RayCast2D" parent="."]
+position = Vector2( 0, 8 )
+enabled = true
+cast_to = Vector2( -12, 0 )
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2( 8, 0 )
+enabled = true
+cast_to = Vector2( 0, 12 )
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+position = Vector2( -8, 0 )
+enabled = true
+cast_to = Vector2( 0, 12 )
+
+[node name="RayCast2D4" type="RayCast2D" parent="."]
+position = Vector2( -8, 0 )
+enabled = true
+cast_to = Vector2( 0, -12 )
+
+[node name="RayCast2D5" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -12 )
+
+[node name="RayCast2D6" type="RayCast2D" parent="."]
+position = Vector2( 8, 0 )
+enabled = true
+cast_to = Vector2( 0, -12 )

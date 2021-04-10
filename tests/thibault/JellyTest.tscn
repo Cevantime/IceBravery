@@ -23,8 +23,5 @@ polygon = PoolVector2Array( 2.12991, -7.2248, 31.1627, -12.5642, 43.5099, -12.89
 
 [node name="Jelly" parent="." instance=ExtResource( 3 )]
 position = Vector2( 225.242, 4.62725 )
-polygon = PoolVector2Array(  )
 damping = 1.0
-stiffness = 85.0
-AtomH = 5
-AtomW = 5
+stiffness = 20.0

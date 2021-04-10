@@ -11,16 +11,12 @@ public class JellyAtom : RigidBody2D
     [Export]
     public bool draggable = false;
 
-    private bool dragged = false;
+    [Signal]
+    delegate void _forces_integrated(Physics2DDirectBodyState state);
 
     public override void _IntegrateForces(Physics2DDirectBodyState state)
     {
-        if (dragged)
-        {
-            Vector2 pos = state.Transform.origin;
-            Vector2 mousePos = GetGlobalMousePosition();
-            ApplyCentralImpulse((mousePos - pos) * state.Step * 100);
-        }
+        EmitSignal("_forces_integrated", new object[] { state });
 
         if (jelly == null)
         {
@@ -57,19 +53,4 @@ public class JellyAtom : RigidBody2D
         neighbours.Add(n);
     }
 
-    public override void _InputEvent(Godot.Object viewport, InputEvent @event, int shapeIdx)
-    {
-        if (@event.IsActionPressed("touch") && draggable)
-        {
-            dragged = true;
-        }
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionReleased("touch") && dragged)
-        {
-            dragged = false;
-        }
-    }
 }

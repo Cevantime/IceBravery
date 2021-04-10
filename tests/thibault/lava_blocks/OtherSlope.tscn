@@ -1,21 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=1]
-[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=2]
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlockShader.tres" type="Material" id=2]
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=3]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 2 )
-shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
-shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
-shader_param/colors = 8
-shader_param/scale_factor = 4.0
-shader_param/resolution_factor = Vector2( 6, 5.63889 )
-shader_param/screen_ratio = null
-shader_param/camera_offset = Vector2( 0, 0 )
-
 [node name="OtherSlope" instance=ExtResource( 3 )]
-material = SubResource( 1 )
+material = ExtResource( 2 )
 polygon = PoolVector2Array( 0, 0, 41, 37, 69.5, 106.5, 84, 163, 106.946, 206.865, 168.737, 234.089, 226.72, 257.423, 280, 280, 280, 810, 0, 810 )
 nexts = [ "StartSlope", "RavinSlope", "JumpingPeek" ]
 

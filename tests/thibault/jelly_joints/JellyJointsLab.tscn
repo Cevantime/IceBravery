@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tests/thibault/jelly_joints/JellyJoints.tscn" type="PackedScene" id=1]
+
+[node name="JellyJointsLab" type="Node2D"]
+
+[node name="JellyJoints" parent="." instance=ExtResource( 1 )]
+position = Vector2( 56.6053, 38.9053 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 57.2456, 38.7249 )
+current = true
+zoom = Vector2( 0.5, 0.5 )

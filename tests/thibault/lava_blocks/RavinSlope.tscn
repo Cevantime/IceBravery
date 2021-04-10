@@ -1,21 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=3]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 3 )
-shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
-shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
-shader_param/colors = 8
-shader_param/scale_factor = 4.0
-shader_param/resolution_factor = Vector2( 6, 5.63889 )
-shader_param/screen_ratio = null
-shader_param/camera_offset = Vector2( 0, 0 )
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlockShader.tres" type="Material" id=3]
 
 [node name="RavinSlope" instance=ExtResource( 2 )]
-material = SubResource( 1 )
+material = ExtResource( 3 )
 position = Vector2( 2.12128, 1.4142 )
 polygon = PoolVector2Array( 0, 0, 90.4854, 23.3441, 120.184, 62.235, 164.025, 106.783, 185.238, 108.904, 190.895, 116.682, 183.116, 147.795, 217.057, 209.313, 260.191, 230.526, 330.902, 233.355, 404.441, 267.296, 320.295, 409.424, 321.913, 444.006, 344.566, 468.546, 566.546, 582.92, 596.782, 585.822, 880, 613, 878.028, 1847.09, 5.03058, 1838.61 )
 nexts = [ "SimpleSlope", "OtherSlope" ]

@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="IceBravery"
-run/main_scene="res://tests/thibault/JellyTest.tscn"
+run/main_scene="res://tests/thibault/SlideTest.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -26,6 +26,10 @@ window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot_states/plugin.cfg" )
 
 [importer_defaults]
 

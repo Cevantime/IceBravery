@@ -2,4 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="script_templates\**" />
+    <Compile Remove="script_templates\**" />
+    <EmbeddedResource Remove="script_templates\**" />
+    <None Remove="script_templates\**" />
+  </ItemGroup>
 </Project>

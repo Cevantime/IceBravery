@@ -1,21 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=1]
-[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=2]
-[ext_resource path="res://tests/thibault/LavaSurfaceBurn.tscn" type="PackedScene" id=3]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 2 )
-shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
-shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
-shader_param/colors = 8
-shader_param/scale_factor = 4.0
-shader_param/resolution_factor = Vector2( 6, 5.63889 )
-shader_param/screen_ratio = null
-shader_param/camera_offset = Vector2( 0, 0 )
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlockShader.tres" type="Material" id=2]
+[ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=3]
 
 [node name="StartSlope" instance=ExtResource( 1 )]
-material = SubResource( 1 )
+material = ExtResource( 2 )
 polygon = PoolVector2Array( 0, 0, 55.6971, 27.7833, 77.416, 41.5563, 105.492, 74.3996, 130.919, 127.903, 146.281, 157.038, 163.233, 178.757, 186.541, 196.238, 212.498, 205.773, 243.752, 213.719, 292.487, 217.427, 330, 230, 330, 650, 0, 650 )
 nexts = [ "SimpleSlope", "RavinSlope", "Mountain" ]
 
@@ -25,7 +15,5 @@ position = Vector2( 330, 230 )
 [node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
 polygon = PoolVector2Array( 0, 0, 55.6971, 27.7833, 77.416, 41.5563, 105.492, 74.3996, 130.919, 127.903, 146.281, 157.038, 163.233, 178.757, 186.541, 196.238, 212.498, 205.773, 243.752, 213.719, 292.487, 217.427, 330, 230, 330, 650, 0, 650 )
 
-[node name="LavaSurfaceBurn" parent="." index="2" instance=ExtResource( 3 )]
-points = PoolVector2Array( -0.657242, -0.687756, 54.4049, 27.3439, 76.4297, 41.026, 105.796, 74.0633, 145.508, 157.157, 162.193, 177.513, 186.554, 197.202, 243.285, 213.888, 293.341, 217.225, 329.716, 230.24 )
-begin_cap_mode = 0
-end_cap_mode = 0
+[node name="LavaSurface" parent="." index="2" instance=ExtResource( 3 )]
+points = PoolVector2Array( 0.208, 1.19311, 55.6454, 27.4135, 75.8725, 41.6474, 105.151, 74.3391, 140.24, 157.231, 163.5, 180, 187.199, 197.846, 242.901, 215.945, 293, 218, 330.5, 229.5 )
