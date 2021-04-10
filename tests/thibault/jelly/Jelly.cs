@@ -87,7 +87,8 @@ public class Jelly : Polygon2D
         {
             return;
         }
-        Vector2 atomSeparation = new Vector2(rect.Size.x / (atomW - 1), rect.Size.y / (atomH - 1));
+
+        Vector2 atomSeparation = new Vector2(atomW > 1 ? rect.Size.x / (atomW - 1) : 0, atomH > 1 ? rect.Size.y / (atomH - 1) : 0);
         Vector2 origin = rect.Position;
         foreach (Node n in GetChildren())
         {
@@ -126,24 +127,24 @@ public class Jelly : Polygon2D
             }
         }
 
-        // for (int i = 0; i < atomW; i++)
-        // {
-        //     edgeBodies.Add(mapAtoms[new Vector2(i, 0)]);
-        // }
+        for (int i = 0; i < atomW; i++)
+        {
+            edgeBodies.Add(mapAtoms[new Vector2(i, 0)]);
+        }
 
-        // for (int j = 1; j < atomH; j++)
-        // {
-        //     edgeBodies.Add(mapAtoms[new Vector2(atomW - 1, j)]);
-        // }
+        for (int j = 1; j < atomH; j++)
+        {
+            edgeBodies.Add(mapAtoms[new Vector2(atomW - 1, j)]);
+        }
 
-        // for (int i = atomW - 2; i >= 0; i--)
-        // {
-        //     edgeBodies.Add(mapAtoms[new Vector2(i, atomH - 1)]);
-        // }
+        for (int i = atomW - 2; i >= 0; i--)
+        {
+            edgeBodies.Add(mapAtoms[new Vector2(i, atomH - 1)]);
+        }
 
-        // for (int j = atomH - 2; j >= 1; j--)
-        // {
-        //     edgeBodies.Add(mapAtoms[new Vector2(0, j)]);
-        // }
+        for (int j = atomH - 2; j >= 1; j--)
+        {
+            edgeBodies.Add(mapAtoms[new Vector2(0, j)]);
+        }
     }
 }

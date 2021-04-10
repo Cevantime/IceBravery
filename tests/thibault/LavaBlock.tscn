@@ -15,6 +15,7 @@ shader_param/screen_ratio = null
 shader_param/camera_offset = Vector2( 0, 0 )
 
 [sub_resource type="PhysicsMaterial" id=2]
+friction = 0.0
 
 [node name="LavaBlock" type="Polygon2D"]
 material = SubResource( 3 )
