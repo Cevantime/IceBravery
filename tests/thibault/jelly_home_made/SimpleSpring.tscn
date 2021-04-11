@@ -2,7 +2,7 @@
 
 [ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=1]
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tests/thibault/jelly/JellyAtom.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/thibault/jelly_home_made/JellyAtom.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )

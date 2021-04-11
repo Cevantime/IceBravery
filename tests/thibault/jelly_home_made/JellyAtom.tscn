@@ -1,12 +1,17 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://tests/thibault/jelly/JellyAtom.cs" type="Script" id=1]
+[ext_resource path="res://tests/thibault/jelly_home_made/JellyAtom.cs" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 0.5
+radius = 1.3146
 
 [node name="JellyAtom" type="RigidBody2D"]
+input_pickable = true
+mass = 0.1
+can_sleep = false
+linear_damp = 0.0
 script = ExtResource( 1 )
+draggable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

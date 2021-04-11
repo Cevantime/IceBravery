@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tests/thibault/jelly_home_made/Jelly.tscn" type="PackedScene" id=1]
+
+[node name="JellyLab" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 50.4537, 21.8633 )
+current = true
+zoom = Vector2( 0.3, 0.3 )
+
+[node name="Jelly" parent="." instance=ExtResource( 1 )]
+position = Vector2( 49.7863, 20.9092 )
+polygon = PoolVector2Array( -10, -10, 0, -10, 10, -10, 10, 0, 10, 10, 0, 10, -10, 10, -10, 0 )
+damping = 1.0
+stiffness = 10.0
+gravityScale = 0.0
+AtomW = 3
+AtomH = 3

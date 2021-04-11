@@ -16,6 +16,9 @@ public class Jelly : Polygon2D
     public float damping = 10.0f;
 
     [Export]
+    public float gravityScale = 1.0f;
+
+    [Export]
     public Rect2 Rect
     {
         get
@@ -64,8 +67,9 @@ public class Jelly : Polygon2D
     private PackedScene jellyAtomPacked;
     public override void _Ready()
     {
-        jellyAtomPacked = GD.Load<PackedScene>("res://tests/thibault/jelly/JellyAtom.tscn");
+        jellyAtomPacked = GD.Load<PackedScene>("res://tests/thibault/jelly_home_made/JellyAtom.tscn");
         UpdateRect();
+        //Engine.TimeScale = 0.5f;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,7 +84,7 @@ public class Jelly : Polygon2D
         Polygon = p;
     }
 
-    private void UpdateRect()
+    private async void UpdateRect()
     {
         edgeBodies = new Array<JellyAtom>();
         if (jellyAtomPacked == null)
@@ -100,9 +104,11 @@ public class Jelly : Polygon2D
             for (int i = atomW - 1; i >= 0; i--)
             {
                 JellyAtom jellyAtom = (JellyAtom)jellyAtomPacked.Instance();
+
                 Vector2 gridPos = new Vector2(i, j);
                 jellyAtom.Position = origin + atomSeparation * gridPos;
                 jellyAtom.jelly = this;
+                jellyAtom.GravityScale = gravityScale;
                 AddChild(jellyAtom);
                 mapAtoms.Add(gridPos, jellyAtom);
                 Vector2[] neighbours = new Vector2[] {
@@ -124,6 +130,7 @@ public class Jelly : Polygon2D
                     neighbourBody.AddNeighbour(new Neighbour(jellyAtom, dist));
                     jellyAtom.AddNeighbour(new Neighbour(neighbourBody, dist));
                 }
+                //await ToSignal(GetTree(), "idle_frame");
             }
         }
 

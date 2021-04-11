@@ -2,7 +2,7 @@
 
 [ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=1]
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tests/thibault/jelly/Jelly.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/thibault/jelly_home_made/Jelly.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -10,7 +10,7 @@ shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
 shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
 shader_param/colors = 8
 shader_param/scale_factor = 4.0
-shader_param/resolution_factor = Vector2( 4.26875, 4.12778 )
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
 shader_param/screen_ratio = null
 shader_param/camera_offset = Vector2( 0, 0 )
 
@@ -23,7 +23,8 @@ polygon = PoolVector2Array( 2.12991, -7.2248, 31.1627, -12.5642, 43.5099, -12.89
 
 [node name="Jelly" parent="." instance=ExtResource( 3 )]
 position = Vector2( 225.242, 4.62725 )
-damping = 3.0
-stiffness = 500.0
-AtomW = 5
+polygon = PoolVector2Array(  )
+damping = 1.0
+stiffness = 85.0
 AtomH = 5
+AtomW = 5
