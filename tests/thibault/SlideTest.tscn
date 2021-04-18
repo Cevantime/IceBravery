@@ -36,9 +36,9 @@ cameraPath = NodePath("../CameraOffset/Camera2D")
 position = Vector2( 61.4721, -47.2177 )
 z_index = 2
 draggable = true
+AtomH = 5
 AtomRadius = 2.2
 AtomW = 5
-AtomH = 5
 
 [node name="Polygon2D" parent="JellyJoints" index="1"]
 polygon = PoolVector2Array( -10, -10, -5, -10, 0, -10, 5, -10, 10, -10, 10, -5, 10, 0, 10, 5, 10, 10, 5, 10, 0, 10, -5, 10, -10, 10, -10, 5, -10, 0, -10, -5 )

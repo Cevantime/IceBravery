@@ -29,7 +29,7 @@ public class JellyJoints : Node2D
     public Polygon2D polygon;
     public Node2D rayCasts;
 
-    [Export(PropertyHint.Range, "3,15")]
+    [Export]
     public Rect2 Rect
     {
         get
@@ -57,7 +57,7 @@ public class JellyJoints : Node2D
         }
     }
 
-    [Export]
+    [Export(PropertyHint.Range, "3,15")]
     public int AtomH
     {
         get
@@ -111,12 +111,16 @@ public class JellyJoints : Node2D
         {
             p[i++] = polygon.ToLocal(b.GlobalPosition);
         }
-        polygon.Polygon = p;
-        int[] ps = Geometry.TriangulatePolygon(polygon.Polygon);
+
+        int[] ps = Geometry.TriangulatePolygon(p);
         if (ps.Length <= 0)
         {
             EmitSignal("IsDecomposed", this);
             GD.Print("decomposed");
+        }
+        else
+        {
+            polygon.Polygon = p;
         }
         rayCasts.GlobalRotation = center.GlobalPosition.AngleToPoint(east.GlobalPosition);
     }
@@ -199,9 +203,9 @@ public class JellyJoints : Node2D
                     joint.DisableCollision = false;
                     joint.Stiffness = stiffness;
                     joint.Damping = damping;
-                    RemoteTransform2D rt = new RemoteTransform2D();
-                    rt.UpdateRotation = false;
-                    rt.UpdateScale = false;
+                    // RemoteTransform2D rt = new RemoteTransform2D();
+                    // rt.UpdateRotation = false;
+                    // rt.UpdateScale = false;
                     // joint.Scale = new Vector2(0.1f, 0.1f);
                     AddChild(joint);
                     // rt.RemotePath = joint.GetPath();
