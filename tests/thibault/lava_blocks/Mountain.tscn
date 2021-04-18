@@ -1,12 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://tests/thibault/assets/shaders/LavaBlockShader.tres" type="Material" id=1]
+[ext_resource path="res://tests/thibault/LavaSurfaceBurn.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
+shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
+shader_param/colors = 8
+shader_param/scale_factor = 4.0
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/screen_ratio = null
+shader_param/camera_offset = Vector2( 0, 0 )
 
 [node name="Mountain" instance=ExtResource( 2 )]
-material = ExtResource( 1 )
-position = Vector2( -43.4182, 0 )
+material = SubResource( 1 )
 polygon = PoolVector2Array( 0, 0, 65.4016, 43.6001, 147.296, 65.6487, 238.011, 59.9791, 322.425, 41.7102, 374.058, 20.8463, 417.526, 14.5467, 454.087, 22.1814, 522.123, 76.988, 566.85, 148.804, 648, 223, 729, 279, 843.553, 321.237, 940, 300, 940, 1150, 0, 1150 )
 nexts = [ "StartSlope" ]
 
@@ -17,4 +27,9 @@ position = Vector2( 1018.78, 311.322 )
 polygon = PoolVector2Array( 0, 0, 65.4016, 43.6001, 147.296, 65.6487, 238.011, 59.9791, 322.425, 41.7102, 374.058, 20.8463, 417.526, 14.5467, 454.087, 22.1814, 522.123, 76.988, 566.85, 148.804, 648, 223, 729, 279, 843.553, 321.237, 940, 300, 940, 1150, 0, 1150 )
 
 [node name="LavaSurface" parent="." index="2" instance=ExtResource( 3 )]
+visible = false
 points = PoolVector2Array( -0.949738, -0.949738, 64.1041, 44.3051, 146.128, 63.397, 240.174, 59.8615, 321.491, 41.4767, 374.058, 22.1062, 418.155, 15.8066, 452.68, 22.601, 520.145, 74.9853, 569.247, 152.725, 646.644, 221.628, 725.93, 276.373, 842.97, 319.791, 936.414, 302.801, 941.239, 395.905, 939.118, 487.122, 940.532, 535.913, 936.922, 606.817 )
+
+[node name="LavaSurfaceBurn" parent="." index="3" instance=ExtResource( 1 )]
+points = PoolVector2Array( 1.31147, 0.999414, 64.9987, 43.0188, 147.147, 64.8456, 235.228, 60.5045, 321.993, 40.8156, 374.051, 20.4593, 416.099, 14.1189, 453.808, 21.7942, 520.216, 75.5215, 566.268, 149.271, 647.08, 222.109, 727.715, 278.175, 842.69, 321.171, 936.554, 301.012 )
+isInterrupted = true

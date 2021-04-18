@@ -76,24 +76,25 @@ float fbm(vec2 coord){
 
 void fragment() {
 	vec2 uv = UV;
+	
 	vec2 size = vec2(12., 12.);
-	uv = round(uv * size) / size;
+	// uv = round(uv * size) / size;
 	vec2 r = vec2(0.);
-    r.x = fbm( uv + vec2(1.7,9.2)+ 3.20*TIME );
-    r.y = fbm( uv + vec2(8.3,2.8)+ 0.5*TIME);
-	float n = fbm(r * 3.);
+    r.x = fbm( uv + 3.20*TIME*vec2(0., 1.0) );
+    r.y = fbm( uv + 0.5*TIME);
+	float n = fbm(r*3.0);
 	vec4 c = vec4(n,n,n, 1.0);
 	
 	float y = uv.y - 0.5;
 	
 	float f = cos(y * 5.0 + 0.5);
 	
-	vec4 color = mix(fire_color_dark, fire_color_light, (f + 0.5) - n * 1.3);
+	vec4 color = mix(fire_color_dark, fire_color_light, (f + 0.9) - n * 1.3);
 	
 	float alpha_factor = smoothstep(0.5, 0.25, abs(y)) - n ;
 	color.a = step(0.2, alpha_factor);
 	
-	color.rgb = round(color.rgb * 5.) / 5.;
+	//color.rgb = round(color.rgb * 5.) / 5.;
 	
 	COLOR = color;
 }

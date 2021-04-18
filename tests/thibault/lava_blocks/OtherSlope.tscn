@@ -1,11 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tests/thibault/LavaSurface.tscn" type="PackedScene" id=1]
-[ext_resource path="res://tests/thibault/assets/shaders/LavaBlockShader.tres" type="Material" id=2]
+[ext_resource path="res://tests/thibault/LavaSurfaceBurn.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tests/thibault/LavaBlock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
+shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
+shader_param/colors = 8
+shader_param/scale_factor = 4.0
+shader_param/resolution_factor = Vector2( 6, 5.63889 )
+shader_param/screen_ratio = null
+shader_param/camera_offset = Vector2( 0, 0 )
 
 [node name="OtherSlope" instance=ExtResource( 3 )]
-material = ExtResource( 2 )
+material = SubResource( 1 )
 polygon = PoolVector2Array( 0, 0, 41, 37, 69.5, 106.5, 84, 163, 106.946, 206.865, 168.737, 234.089, 226.72, 257.423, 280, 280, 280, 810, 0, 810 )
 nexts = [ "StartSlope", "RavinSlope", "JumpingPeek" ]
 
@@ -16,4 +27,8 @@ position = Vector2( 280, 280 )
 polygon = PoolVector2Array( 0, 0, 41, 37, 69.5, 106.5, 84, 163, 106.946, 206.865, 168.737, 234.089, 226.72, 257.423, 280, 280, 280, 810, 0, 810 )
 
 [node name="LavaSurface" parent="." index="2" instance=ExtResource( 1 )]
+visible = false
 points = PoolVector2Array( 0.571289, -0.412136, 40.707, 37.0479, 69.6288, 107.575, 83.5622, 163.71, 106.978, 206.638, 226.801, 257.429, 280.987, 280.366 )
+
+[node name="LavaSurfaceBurn" parent="." index="3" instance=ExtResource( 2 )]
+points = PoolVector2Array( 1.23275, 1.24298, 40.5223, 37.3915, 69.9551, 105.176, 83.3337, 162.556, 106.821, 206.854, 279.553, 280.287 )

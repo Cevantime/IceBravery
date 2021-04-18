@@ -18,10 +18,11 @@ public class CanJump : StateMachine
 
     public override void _Process(float delta)
     {
+        Node2D rayCasts = jelly.GetNode<Node2D>("RayCasts");
         if (Input.IsActionPressed("ui_accept"))
         {
             Vector2 dirJump = Vector2.Zero;
-            foreach (Node n in jelly.GetNode("RayCasts").GetChildren())
+            foreach (Node n in rayCasts.GetChildren())
             {
                 RayCast2D rayCast = (RayCast2D)n;
                 if (rayCast.IsColliding())
@@ -29,7 +30,7 @@ public class CanJump : StateMachine
                     dirJump -= rayCast.CastTo;
                 }
             }
-            dirJump = dirJump.Normalized();
+            dirJump = dirJump.Rotated(rayCasts.GlobalRotation).Normalized();
             jelly.center.ApplyCentralImpulse(dirJump * 120);
         }
     }

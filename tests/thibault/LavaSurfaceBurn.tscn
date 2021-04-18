@@ -1,19 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://tests/thibault/assets/shaders/LavaSurfaceBurn.shader" type="Shader" id=2]
+[ext_resource path="res://tests/thibault/LavaSurfaceBurn.cs" type="Script" id=3]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/fire_color_light = Color( 1, 0.843137, 0.372549, 1 )
 shader_param/fire_color_dark = Color( 0.541176, 0.00784314, 0.00784314, 1 )
 
-[node name="LavaSurfaceBurn" type="Line2D"]
-material = SubResource( 2 )
+[node name="LavaSurfaceBurn" type="Line2D" groups=[
+"LavaBurn",
+]]
+material = SubResource( 1 )
+z_index = 1
 width = 16.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 1 )
 texture_mode = 1
 joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+script = ExtResource( 3 )

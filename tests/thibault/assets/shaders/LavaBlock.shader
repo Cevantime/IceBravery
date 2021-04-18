@@ -93,7 +93,8 @@ void fragment()
 	vec2 uv = ((world_pos + camera_offset) / resolution_factor) * 0.015;
 	
 	vec2 size = vec2(48.0, 48.0);
-	vec2 noise_uv = round(uv * size) / size;
+	vec2 noise_uv = uv;
+	//vec2 noise_uv = round(uv * size) / size;
 	
 	noise_uv *= scale_factor;
     vec2 q = vec2(0.);

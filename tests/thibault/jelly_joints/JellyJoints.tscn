@@ -5,10 +5,8 @@
 [ext_resource path="res://tests/thibault/states/CanJump.cs" type="Script" id=3]
 [ext_resource path="res://addons/godot_states/MultipleStateMachine.cs" type="Script" id=4]
 
-[node name="JellyJoints" type="Polygon2D"]
-polygon = PoolVector2Array( -10, -10, -6.66667, -10, -3.33333, -10, 0, -10, 3.33333, -10, 6.66667, -10, 10, -10, 10, -6.66667, 10, -3.33333, 10, 0, 10, 3.33333, 10, 6.66667, 10, 10, 6.66667, 10, 3.33333, 10, 0, 10, -3.33333, 10, -6.66667, 10, -10, 10, -10, 6.66667, -10, 3.33333, -10, 0, -10, -3.33333, -10, -6.66667 )
+[node name="JellyJoints" type="Node2D"]
 script = ExtResource( 1 )
-AtomRadius = 1.2
 
 [node name="States" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -18,3 +16,8 @@ script = ExtResource( 4 )
 
 [node name="CanJump" type="Node" parent="States/Idle"]
 script = ExtResource( 3 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_offset = Vector2( 10, 10 )
+texture_scale = Vector2( 1.5, 1.5 )
+polygon = PoolVector2Array( -10, -10, -6.66667, -10, -3.33333, -10, 0, -10, 3.33333, -10, 6.66667, -10, 10, -10, 10, -6.66667, 10, -3.33333, 10, 0, 10, 3.33333, 10, 6.66667, 10, 10, 6.66667, 10, 3.33333, 10, 0, 10, -3.33333, 10, -6.66667, 10, -10, 10, -10, 6.66667, -10, 3.33333, -10, 0, -10, -3.33333, -10, -6.66667 )

@@ -3,7 +3,7 @@ using System;
 using Godot.Collections;
 
 [Tool]
-public class JellyJoints : Polygon2D
+public class JellyJoints : Node2D
 {
     private Rect2 rect = new Rect2(-10, -10, 20, 20);
     private int atomW = 7;
@@ -13,7 +13,7 @@ public class JellyJoints : Polygon2D
     public float stiffness = 100.0f;
 
     [Export]
-    public float damping = 10.0f;
+    public float damping = 1.0f;
 
     [Export]
     public float gravityScale = 1.0f;
@@ -24,8 +24,12 @@ public class JellyJoints : Polygon2D
     public float atomRadius = 1.5f;
 
     public JellyAtomJoints center;
+    public JellyAtomJoints east;
 
-    [Export]
+    public Polygon2D polygon;
+    public Node2D rayCasts;
+
+    [Export(PropertyHint.Range, "3,15")]
     public Rect2 Rect
     {
         get
@@ -39,7 +43,7 @@ public class JellyJoints : Polygon2D
         }
     }
 
-    [Export]
+    [Export(PropertyHint.Range, "3,15")]
     public int AtomW
     {
         get
@@ -87,8 +91,12 @@ public class JellyJoints : Polygon2D
     private Dictionary<Vector2, RigidBody2D> mapAtoms = new Dictionary<Vector2, RigidBody2D>();
 
     private PackedScene jellyAtomPacked;
+
+    [Signal]
+    delegate void IsDecomposed(JellyJoints self);
     public override void _Ready()
     {
+        polygon = GetNode<Polygon2D>("Polygon2D");
         jellyAtomPacked = GD.Load<PackedScene>("res://tests/thibault/jelly_joints/JellyAtomJoints.tscn");
         UpdateRect();
     }
@@ -96,13 +104,21 @@ public class JellyJoints : Polygon2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
+        polygon.GlobalPosition = center.GlobalPosition;
         Vector2[] p = new Vector2[edgeBodies.Count];
         int i = 0;
         foreach (RigidBody2D b in edgeBodies)
         {
-            p[i++] = b.Position;
+            p[i++] = polygon.ToLocal(b.GlobalPosition);
         }
-        Polygon = p;
+        polygon.Polygon = p;
+        int[] ps = Geometry.TriangulatePolygon(polygon.Polygon);
+        if (ps.Length <= 0)
+        {
+            EmitSignal("IsDecomposed", this);
+            GD.Print("decomposed");
+        }
+        rayCasts.GlobalRotation = center.GlobalPosition.AngleToPoint(east.GlobalPosition);
     }
 
     private void UpdateRect()
@@ -131,20 +147,16 @@ public class JellyJoints : Polygon2D
                 jellyAtom.SetDraggable(draggable);
                 AddChild(jellyAtom);
                 mapAtoms.Add(gridPos, jellyAtom);
-                Vector2[] neighbours = new Vector2[] {
-                    new Vector2(i + 1, j),
-                    new Vector2(i, j + 1),
-                    new Vector2(i + 1, j + 1),
-                    new Vector2(i - 1, j + 1)
-                };
-                if (i == 2 && j == 2)
+                int mX = (int)(atomW / 2);
+                int mY = (int)(atomH / 2);
+                if (i == mX && j == mY)
                 {
                     center = jellyAtom;
-                    Node2D rayCasts = (Node2D)GD.Load<PackedScene>("res://tests/thibault/RayCasts.tscn").Instance();
+                    rayCasts = (Node2D)GD.Load<PackedScene>("res://tests/thibault/RayCasts.tscn").Instance();
                     AddChild(rayCasts);
                     RemoteTransform2D rt = new RemoteTransform2D();
                     rt.UpdateRotation = false;
-                    rt.UpdateRotation = false;
+                    rt.UpdateScale = false;
                     rt.RemotePath = rayCasts.GetPath();
                     jellyAtom.AddChild(rt);
                     foreach (Node n in GetTree().GetNodesInGroup("CameraOffset"))
@@ -152,11 +164,21 @@ public class JellyJoints : Polygon2D
                         Node2D cameraOffset = (Node2D)n;
                         rt = new RemoteTransform2D();
                         rt.UpdateRotation = false;
-                        rt.UpdateRotation = false;
+                        rt.UpdateScale = false;
                         rt.RemotePath = cameraOffset.GetPath();
                         jellyAtom.AddChild(rt);
                     }
                 }
+                else if (j == mY && i == atomW - 1)
+                {
+                    east = jellyAtom;
+                }
+                Vector2[] neighbours = new Vector2[] {
+                    new Vector2(i + 1, j),
+                    new Vector2(i, j + 1),
+                    new Vector2(i + 1, j + 1),
+                    new Vector2(i - 1, j + 1)
+                };
                 foreach (Vector2 neighbour in neighbours)
                 {
                     RigidBody2D neighbourBody;
