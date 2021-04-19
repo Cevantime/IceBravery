@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tests/thibault/JellyJoint.cs" type="Script" id=1]
+
+[node name="JellyJoint" type="DampedSpringJoint2D"]
+script = ExtResource( 1 )

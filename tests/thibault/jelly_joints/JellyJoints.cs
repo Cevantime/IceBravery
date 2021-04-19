@@ -88,8 +88,9 @@ public class JellyJoints : Node2D
 
     private Array<RigidBody2D> edgeBodies = new Array<RigidBody2D>();
 
-    private Dictionary<Vector2, RigidBody2D> mapAtoms = new Dictionary<Vector2, RigidBody2D>();
+    public Dictionary<Vector2, RigidBody2D> mapAtoms = new Dictionary<Vector2, RigidBody2D>();
 
+    public Array<JellyJoint> joints = new Array<JellyJoint>();
     private PackedScene jellyAtomPacked;
 
     [Signal]
@@ -105,6 +106,8 @@ public class JellyJoints : Node2D
     public override void _Process(float delta)
     {
         polygon.GlobalPosition = center.GlobalPosition;
+        rayCasts.GlobalRotation = center.GlobalPosition.AngleToPoint(east.GlobalPosition);
+        polygon.GlobalRotation = rayCasts.GlobalRotation;
         Vector2[] p = new Vector2[edgeBodies.Count];
         int i = 0;
         foreach (RigidBody2D b in edgeBodies)
@@ -122,7 +125,6 @@ public class JellyJoints : Node2D
         {
             polygon.Polygon = p;
         }
-        rayCasts.GlobalRotation = center.GlobalPosition.AngleToPoint(east.GlobalPosition);
     }
 
     private void UpdateRect()
@@ -147,7 +149,7 @@ public class JellyJoints : Node2D
                 Vector2 gridPos = new Vector2(i, j);
                 jellyAtom.Position = origin + atomSeparation * gridPos;
                 jellyAtom.GravityScale = gravityScale;
-                jellyAtom.SetRadius(atomRadius);
+                jellyAtom.Radius = atomRadius;
                 jellyAtom.SetDraggable(draggable);
                 AddChild(jellyAtom);
                 mapAtoms.Add(gridPos, jellyAtom);
@@ -192,7 +194,7 @@ public class JellyJoints : Node2D
                         continue;
                     }
 
-                    DampedSpringJoint2D joint = new DampedSpringJoint2D();
+                    JellyJoint joint = new JellyJoint();
                     Vector2 separation = new Vector2(neighbourBody.Position - jellyAtom.Position);
                     joint.Position = jellyAtom.Position;
                     joint.RestLength = separation.Length();
@@ -203,6 +205,7 @@ public class JellyJoints : Node2D
                     joint.DisableCollision = false;
                     joint.Stiffness = stiffness;
                     joint.Damping = damping;
+                    joints.Add(joint);
                     // RemoteTransform2D rt = new RemoteTransform2D();
                     // rt.UpdateRotation = false;
                     // rt.UpdateScale = false;

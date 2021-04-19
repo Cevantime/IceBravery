@@ -4,7 +4,7 @@
 [ext_resource path="res://tests/thibault/states/Draggable.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 2.2
+radius = 1.5
 
 [node name="JellyAtomJoints" type="RigidBody2D"]
 z_index = 1

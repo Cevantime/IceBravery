@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tests/thibault/jelly_joints/JellyAtomJoints.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/thibault/MeltingTest.cs" type="Script" id=2]
+
+[node name="MeltingTest" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="JellyAtomJoints" parent="." instance=ExtResource( 1 )]
+position = Vector2( 29.9622, 26.3905 )
+gravity_scale = 0.0
+
+[node name="JellyAtomJoints2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 52.7426, 26.2705 )
+gravity_scale = 0.0
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+position = Vector2( 30.0339, 26.3631 )
+rotation = -1.5708
+node_a = NodePath("../JellyAtomJoints")
+node_b = NodePath("../JellyAtomJoints2")
+length = 25.0
+rest_length = 25.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 41.5774, 25.8284 )
+current = true
+zoom = Vector2( 0.3, 0.3 )
