@@ -10,6 +10,7 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
+
 }
 
 [application]
@@ -34,7 +35,7 @@ window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot_states/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [importer_defaults]
 

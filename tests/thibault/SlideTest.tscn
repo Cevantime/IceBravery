@@ -1,9 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tests/thibault/lava_blocks/StartSlope.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tests/thibault/jelly_joints/JellyJoints.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tests/thibault/states/systems/SpawnZones.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tests/thibault/assets/shaders/LavaBlock.shader" type="Shader" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://tests/thibault/assets/shaders/Background.shader" type="Shader" id=6]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 6 )
+shader_param/fire_color_light = Color( 0.941, 0.992, 0.01, 1 )
+shader_param/fire_color_intermediate = Color( 1, 0, 0, 1 )
+shader_param/fire_color_dark = Color( 0.01, 0.01, 0.01, 1 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -17,6 +25,16 @@ shader_param/screen_ratio = null
 shader_param/camera_offset = Vector2( 1012.74, -17.7608 )
 
 [node name="SlideTest" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_scale = Vector2( 0.1, 0.1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource( 3 )
+scale = Vector2( 100, 100 )
+texture = ExtResource( 5 )
 
 [node name="CameraOffset" type="Node2D" parent="." groups=[
 "CameraOffset",
@@ -37,9 +55,9 @@ cameraPath = NodePath("../CameraOffset/Camera2D")
 position = Vector2( 61.4721, -47.2177 )
 z_index = 2
 draggable = true
+AtomH = 5
 AtomRadius = 2.2
 AtomW = 5
-AtomH = 5
 
 [node name="Polygon2D" parent="JellyJoints" index="1"]
 polygon = PoolVector2Array( 10, 10, 5, 10, 0, 10, -5, 10, -10, 10, -10, 5, -10, 3.8147e-06, -10, -5, -10, -10, -5, -10, -3.8147e-06, -10, 5, -10, 10, -10, 10, -5, 10, 0, 10, 5 )
