@@ -1,10 +1,11 @@
 shader_type canvas_item;
 
-uniform vec4 fire_color_light:hint_color = vec4(1.0, 0.5, 0., 1.0);
-uniform vec4 fire_color_dark:hint_color = vec4(0.65, 0., 0., 1.0);
+uniform vec4 fire_color_light:hint_color = vec4(0.941, 0.992, 0.01, 1.0);
+uniform vec4 fire_color_intermediate:hint_color = vec4(1.0, 0.0, 0., 1.0);
+uniform vec4 fire_color_dark:hint_color = vec4(0.01, 0.01, 0.01, 1.0);
 
-uniform int colors = 6;
-uniform float scale_factor = 5.;
+uniform int colors = 4;
+uniform float scale_factor = 4.;
 uniform sampler2D noise_texture:hint_black;
 uniform vec2 resolution_factor;
 uniform float screen_ratio;
@@ -109,7 +110,14 @@ void fragment()
 	//float n = perlin_noise(noise_uv);
 	//float n = length(texture(noise_texture, noise_uv).xy);
 	
-	vec4 color = mix(fire_color_dark, fire_color_light, n);
+	vec4 color;
+	
+	if( n < 0.5 ) {
+		color = mix(fire_color_dark, fire_color_intermediate, n * 2.);
+	} else {
+		color = mix(fire_color_intermediate, fire_color_light, (n-0.5) * 2.);
+	}
+	
 	
 	color.rgb = round(color.rgb * float(colors)) / float(colors);
 	

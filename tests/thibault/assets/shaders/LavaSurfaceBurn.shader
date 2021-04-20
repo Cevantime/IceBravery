@@ -1,7 +1,8 @@
 shader_type canvas_item;
 
-uniform vec4 fire_color_light:hint_color = vec4(1.0, 0.5, 0., 1.0);
-uniform vec4 fire_color_dark:hint_color = vec4(0.65, 0., 0., 1.0);
+uniform vec4 fire_color_light:hint_color = vec4(0.941, 0.992, 0.01, 1.0);
+uniform vec4 fire_color_intermediate:hint_color = vec4(1.0, 0.0, 0., 1.0);
+uniform vec4 fire_color_dark:hint_color = vec4(0.01, 0.01, 0.01, 1.0);
 
 float rand(vec2 coord){
 	// prevents randomness decreasing from coordinates too large
@@ -89,12 +90,19 @@ void fragment() {
 	
 	float f = cos(y * 5.0 + 0.5);
 	
-	vec4 color = mix(fire_color_dark, fire_color_light, (f + 0.9) - n * 1.3);
+	n = (f + 0.9) - n * 2.;
 	
-	float alpha_factor = smoothstep(0.5, 0.25, abs(y)) - n ;
-	color.a = step(0.2, alpha_factor);
+	vec4 color;
+	if( n < 0.33 ) {
+		color = mix(fire_color_dark, fire_color_intermediate, n * 3.);
+	} else {
+		color = mix(fire_color_intermediate, fire_color_light, (n-0.33) * 1.5);
+	}
 	
-	//color.rgb = round(color.rgb * 5.) / 5.;
+	//float alpha_factor = smoothstep(0.5, 0.25, abs(y)) - n ;
+	color.a = step(0.0, n);
+	
+	color.rgb = round(color.rgb * 4.) / 4.;
 	
 	COLOR = color;
 }

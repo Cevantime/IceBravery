@@ -21,16 +21,16 @@ public class Melt : StateMachine
 
     public override void _Process(float delta)
     {
-        int nbCollinding = 0;
+        int nbColliding = 0;
         foreach (Node n in jellyJoints.rayCasts.GetChildren())
         {
             RayCast2D rayCast = (RayCast2D)n;
-            if (rayCast.IsColliding())
+            if (rayCast.IsColliding() && ((Node)rayCast.GetCollider()).GetParent().IsInGroup("LavaBlock"))
             {
-                nbCollinding++;
+                nbColliding++;
             }
         }
-        float meltingFactor = nbCollinding * meltingSpeed * delta;
+        float meltingFactor = nbColliding * meltingSpeed * delta;
         foreach (JellyAtomJoints jellyAtom in jellyJoints.mapAtoms.Values)
         {
             jellyAtom.Melt(meltingFactor);

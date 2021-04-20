@@ -7,9 +7,10 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/fire_color_light = Color( 1, 0.329412, 0, 1 )
-shader_param/fire_color_dark = Color( 0.0980392, 0, 0, 1 )
-shader_param/colors = 8
+shader_param/fire_color_light = Color( 0.941, 0.992, 0.01, 1 )
+shader_param/fire_color_intermediate = Color( 1, 0, 0, 1 )
+shader_param/fire_color_dark = Color( 0.01, 0.01, 0.01, 1 )
+shader_param/colors = 4
 shader_param/scale_factor = 4.0
 shader_param/resolution_factor = Vector2( 6, 5.63889 )
 shader_param/screen_ratio = null
